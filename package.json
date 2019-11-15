@@ -11,7 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-inline-css": "^3.4.0",
     "gulp-mustache": "^4.1.2",
     "prettier": "^1.19.1"
+  },
+  "dependencies": {
+    "gulp-htmlmin": "^5.0.1"
   }
 }
