@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "gulp clean",
+    "build": "gulp"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-inline-css": "^3.4.0",
     "gulp-mustache": "^4.1.2",
