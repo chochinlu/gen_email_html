@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "hello": "gulp hello --issue ",
     "clean": "gulp clean",
-    "build": "gulp"
+    "build": "gulp default --issue "
   },
   "keywords": [],
   "author": "",
