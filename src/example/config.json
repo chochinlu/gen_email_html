@@ -1,0 +1,6 @@
+{
+  "inject": {
+    "frontString": "insert into ddd values",
+    "endString": "\")"
+  }
+}

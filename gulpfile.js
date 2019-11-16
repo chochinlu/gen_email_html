@@ -5,11 +5,18 @@ const inlineCss = require("gulp-inline-css");
 const del = require("del");
 const rename = require("gulp-rename");
 const inject = require("gulp-inject-string");
+const fs = require('fs')
 
+// read command arguments to get paths
 const issue = process.argv[4];
 const sourceDir = `./src/${issue}`;
 const sourceTemplate = `${sourceDir}/*.mustache`;
 const target = `./dist/${issue}`;
+
+// get config
+const configPath = `${sourceDir}/config.json`
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+const {frontString, endString} = config.inject
 
 function hello(done) {
   console.log("hello issue: ", issue);
@@ -40,7 +47,7 @@ function allLang(done) {
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(rename(`${lang}.html`))
         .pipe(dest(target))
-        .pipe(inject.wrap('insert into aaa values("', '")'))
+        .pipe(inject.wrap(frontString, endString))
         .pipe(rename(`${lang}.sql`))
         .pipe(dest(target));
     };
@@ -60,7 +67,7 @@ function allLangSql(done) {
         .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: ".html" }))
         .pipe(inlineCss({ removeHtmlSelectors: true }))
         .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(inject.wrap('insert into aaa values("', '")'))
+        .pipe(inject.wrap(frontString, endString))
         .pipe(rename(`${lang}.sql`))
         .pipe(dest(target));
     };
