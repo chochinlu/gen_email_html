@@ -4,6 +4,7 @@ const htmlmin = require("gulp-htmlmin");
 const inlineCss = require("gulp-inline-css");
 const del = require("del");
 const rename = require("gulp-rename");
+const inject = require("gulp-inject-string");
 
 const issue = process.argv[4];
 const sourceDir = `./src/${issue}`;
@@ -29,6 +30,7 @@ function htmlcss() {
     .pipe(dest(target));
 }
 
+// minified html, and sql
 function allLang(done) {
   const tasks = ["en", "cn"].map(lang => {
     return () => {
@@ -37,6 +39,29 @@ function allLang(done) {
         .pipe(inlineCss({ removeHtmlSelectors: true }))
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(rename(`${lang}.html`))
+        .pipe(dest(target))
+        .pipe(inject.wrap('insert into aaa values("', '")'))
+        .pipe(rename(`${lang}.sql`))
+        .pipe(dest(target));
+    };
+  });
+
+  return parallel(...tasks, parallelDone => {
+    parallelDone();
+    done();
+  })();
+}
+
+// only sql
+function allLangSql(done) {
+  const tasks = ["en", "cn"].map(lang => {
+    return () => {
+      return src(sourceTemplate)
+        .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: ".html" }))
+        .pipe(inlineCss({ removeHtmlSelectors: true }))
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(inject.wrap('insert into aaa values("', '")'))
+        .pipe(rename(`${lang}.sql`))
         .pipe(dest(target));
     };
   });
@@ -52,4 +77,5 @@ const build = series(hello, clean, allLang);
 exports.hello = hello;
 exports.clean = clean;
 exports.htmlcss = htmlcss;
+exports.allLangSql = allLangSql;
 exports.default = build;

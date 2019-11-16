@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "hello": "gulp hello --issue ",
+    "hello": "gulp hello --issue",
     "clean": "gulp clean",
-    "build": "gulp default --issue "
+    "sql": "gulp allLangSql --issue",
+    "build": "gulp default --issue"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "del": "^5.1.0",
     "gulp": "^4.0.2",
+    "gulp-inject-string": "^1.1.2",
     "gulp-inline-css": "^3.4.0",
     "gulp-mustache": "^4.1.2",
     "gulp-rename": "^1.4.0",
