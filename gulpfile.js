@@ -1,19 +1,18 @@
-const { src, dest, series } = require("gulp");
+const { src, dest, series, parallel } = require("gulp");
 const mustache = require("gulp-mustache");
 const htmlmin = require("gulp-htmlmin");
 const inlineCss = require("gulp-inline-css");
 const del = require("del");
+const rename = require("gulp-rename");
 
 const issue = process.argv[4];
 const sourceDir = `./src/${issue}`;
 const sourceTemplate = `${sourceDir}/*.mustache`;
-const jsonEn = `${sourceDir}/en.json`;
 const target = `./dist/${issue}`;
 
 function hello(done) {
   console.log("hello issue: ", issue);
   console.log("source:　", sourceTemplate);
-  console.log('en json: ', jsonEn)
   console.log("target:　", target);
   done();
 }
@@ -24,13 +23,31 @@ function clean() {
 
 function htmlcss() {
   return src(sourceTemplate)
-    .pipe(mustache(jsonEn, { extension: ".html" }))
+    .pipe(mustache(`${sourceDir}/en.json`, { extension: ".html" }))
     .pipe(inlineCss({ removeHtmlSelectors: true }))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest(target));
 }
 
-const build = series(hello, clean, htmlcss);
+function allLang(done) {
+  const tasks = ["en", "cn"].map(lang => {
+    return () => {
+      return src(sourceTemplate)
+        .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: ".html" }))
+        .pipe(inlineCss({ removeHtmlSelectors: true }))
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(rename(`${lang}.html`))
+        .pipe(dest(target));
+    };
+  });
+
+  return parallel(...tasks, parallelDone => {
+    parallelDone();
+    done();
+  })();
+}
+
+const build = series(hello, clean, allLang);
 
 exports.hello = hello;
 exports.clean = clean;
