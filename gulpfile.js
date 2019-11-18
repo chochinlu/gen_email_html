@@ -29,17 +29,9 @@ function clean() {
   return del(["./dist"]);
 }
 
-function htmlcss() {
-  return src(sourceTemplate)
-    .pipe(mustache(`${sourceDir}/en.json`, { extension: ".html" }))
-    .pipe(inlineCss({ removeHtmlSelectors: true }))
-    .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(dest(target));
-}
-
 // minified html, and sql
 function allLang(done) {
-  const tasks = ["en", "cn"].map(lang => {
+  const tasks = config.langs.map(lang => {
     return () => {
       return src(sourceTemplate)
         .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: ".html" }))
@@ -61,7 +53,7 @@ function allLang(done) {
 
 // only sql
 function allLangSql(done) {
-  const tasks = ["en", "cn"].map(lang => {
+  const tasks = config.langs.map(lang => {
     return () => {
       return src(sourceTemplate)
         .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: ".html" }))
