@@ -59,30 +59,9 @@ function allLang(done) {
   })();
 }
 
-// only sql
-function allLangSql(done) {
-  const tasks = config.langs.map(lang => {
-    return () => {
-      return src(sourceTemplate)
-        .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: ".html" }))
-        .pipe(inlineCss({ removeHtmlSelectors: true }))
-        .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(inject.wrap(frontString.join(''), endString.join('')))
-        .pipe(rename(`${lang}.sql`))
-        .pipe(dest(target));
-    };
-  });
-
-  return parallel(...tasks, parallelDone => {
-    parallelDone();
-    done();
-  })();
-}
-
 const build = series(hello, clean, copyImg, allLang);
 
 exports.hello = hello;
 exports.clean = clean;
 exports.copyImg = copyImg;
-exports.allLangSql = allLangSql;
 exports.default = build;

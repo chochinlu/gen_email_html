@@ -6,7 +6,6 @@
   "scripts": {
     "hello": "gulp hello --issue",
     "clean": "gulp clean",
-    "sql": "gulp allLangSql --issue",
     "build": "gulp default --issue"
   },
   "keywords": [],
