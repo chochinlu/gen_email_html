@@ -6,12 +6,14 @@
   "scripts": {
     "hello": "gulp hello --issue",
     "clean": "gulp clean",
+    "watch": "gulp watch --issue",
     "build": "gulp default --issue"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-inject-string": "^1.1.2",
