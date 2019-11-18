@@ -23,6 +23,8 @@ function hello(done) {
   console.log("hello issue: ", issue);
   console.log("source:　", sourceTemplate);
   console.log("target:　", target);
+  console.log(frontString.join(''));
+  console.log(endString.join(''));
   done();
 }
 
@@ -45,7 +47,7 @@ function allLang(done) {
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(rename(`${lang}.html`))
         .pipe(dest(target))
-        .pipe(inject.wrap(frontString, endString))
+        .pipe(inject.wrap(frontString.join(''), endString.join('')))
         .pipe(rename(`${lang}.sql`))
         .pipe(dest(target));
     };
@@ -65,7 +67,7 @@ function allLangSql(done) {
         .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: ".html" }))
         .pipe(inlineCss({ removeHtmlSelectors: true }))
         .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(inject.wrap(frontString, endString))
+        .pipe(inject.wrap(frontString.join(''), endString.join('')))
         .pipe(rename(`${lang}.sql`))
         .pipe(dest(target));
     };
