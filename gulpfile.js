@@ -5,18 +5,19 @@ const inlineCss = require("gulp-inline-css");
 const del = require("del");
 const rename = require("gulp-rename");
 const inject = require("gulp-inject-string");
-const fs = require('fs')
+const fs = require("fs");
 
 // read command arguments to get paths
 const issue = process.argv[4];
 const sourceDir = `./src/${issue}`;
 const sourceTemplate = `${sourceDir}/*.mustache`;
+const sourceImage = `${sourceDir}/img/**/*.{gif,jpg,png,svg}`;
 const target = `./dist/${issue}`;
 
 // get config
-const configPath = `${sourceDir}/config.json`
-const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-const {frontString, endString} = config.inject
+const configPath = `${sourceDir}/config.json`;
+const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+const { frontString, endString } = config.inject;
 
 function hello(done) {
   console.log("hello issue: ", issue);
@@ -27,6 +28,11 @@ function hello(done) {
 
 function clean() {
   return del(["./dist"]);
+}
+
+function copyImg() {
+  return src(sourceImage)
+    .pipe(dest(`${target}/img`))
 }
 
 // minified html, and sql
@@ -71,10 +77,10 @@ function allLangSql(done) {
   })();
 }
 
-const build = series(hello, clean, allLang);
+const build = series(hello, clean, copyImg, allLang);
 
 exports.hello = hello;
 exports.clean = clean;
-exports.htmlcss = htmlcss;
+exports.copyImg = copyImg;
 exports.allLangSql = allLangSql;
 exports.default = build;
