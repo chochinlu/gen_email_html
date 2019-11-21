@@ -7,7 +7,8 @@
     "hello": "gulp hello --issue",
     "clean": "gulp clean",
     "watch": "gulp watch --issue",
-    "build": "gulp default --issue"
+    "build": "gulp default --issue",
+    "gen": "node genConfig.js"
   },
   "keywords": [],
   "author": "",
