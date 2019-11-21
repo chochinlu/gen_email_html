@@ -89,7 +89,15 @@ dist
 
 ### Npm commands 
 
-Testing, check basic information you set: 
+First create the project source folder and json files: 
+
+```$xslt
+$ npm run gen [your source project folder name]
+```
+
+It will help you to create the basic `config.json`, `en.json` and `email.mustache`
+
+You can check basic information you set: 
 
 ```$xslt
 $npm run hello
