@@ -92,7 +92,7 @@ dist
 First create the project source folder and json files: 
 
 ```$xslt
-$ npm run gen [your source project folder name]
+$ npm run gen
 ```
 
 It will help you to create the basic `config.json`, `en.json` and `email.mustache`
