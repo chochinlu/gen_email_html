@@ -106,6 +106,7 @@ $npm run hello
 Development: 
 
 ```
+$ npm run build [your source project folder name]
 $ npm run watch [your source project folder name]
 ```
 
