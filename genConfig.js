@@ -55,9 +55,6 @@ const genLangObjStr = (langStr) => {
   )
 }
 
-const langJsonPath = (folderPath, langStr) => {
-  return `${folderPath}/${langStr}.json`
-}
 
 /* ----- Main Flow -------------------------------- */
 
