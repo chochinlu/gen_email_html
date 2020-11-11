@@ -1,5 +1,6 @@
 const readline = require('readline')
 const fs = require('fs')
+const { COPYFILE_EXCL } = fs.constants
 
 const SRC = './src'
 
@@ -57,6 +58,8 @@ const genLangObjStr = (langStr) => {
 const langJsonPath = (folderPath, langStr) => {
   return `${folderPath}/${langStr}.json`
 }
+
+/* ----- Main Flow -------------------------------- */
 
 console.log('[START] gen basic files....')
 const rl = readline.createInterface({
@@ -119,7 +122,25 @@ rl.question(
             } else {
               // use the common template folder to generate the target template
               // check if this folder exists
-              console.log('Common Template exists')
+              fs.readdir(`${SRC}/${commonTemplateFolderName}`, (err, files) => {
+                if (err) {
+                  console.error(
+                    `[Error] no such folder: ${commonTemplateFolderName}`
+                  )
+                } else {
+                  // console.log(files)
+                  files.forEach((f) => {
+                    fs.copyFileSync(
+                      `${SRC}/${commonTemplateFolderName}/${f}`,
+                      `${SRC}/${folderName}/${f}`,
+                      COPYFILE_EXCL
+                    )
+                    console.log(`${f} copied.`)
+                  })
+                  console.log('[COMPLETE]')
+                }
+                rl.close()
+              })
             }
           }
         )
