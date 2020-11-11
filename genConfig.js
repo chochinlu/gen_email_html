@@ -1,6 +1,8 @@
 const readline = require('readline')
 const fs = require('fs')
 
+const TARGET_TEMPLATE = 'index.mustache'
+
 const emailTemplate = `<!doctype html>
 <html lang="en">
 <head>
@@ -63,7 +65,7 @@ rl.question(
               }
             }
 
-            const templatePath = `${folderPath}/email.mustache`
+            const templatePath = `${folderPath}/${TARGET_TEMPLATE}`
 
             try {
               fs.writeFileSync(

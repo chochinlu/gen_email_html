@@ -95,7 +95,7 @@ First create the project source folder and json files:
 $ npm run gen
 ```
 
-It will help you to create the basic `config.json`, `en.json` and `email.mustache`
+It will help you to create the basic `config.json`, `en.json` and `index.mustache`
 
 You can check basic information you set: 
 

@@ -11,7 +11,7 @@ const browsersync = require('browser-sync').create()
 // read command arguments to get paths
 const issue = process.argv[4]
 const sourceDir = `./src/${issue}`
-const sourceTemplate = `${sourceDir}/*.mustache`
+const sourceTemplate = `${sourceDir}/index.mustache`
 const sourceImage = `${sourceDir}/img/**/*.{gif,jpg,png,svg}`
 const target = `./dist/${issue}`
 
