@@ -63,9 +63,11 @@ if you dont want inject anything, just:
 }
 ```
 
-### email.mustache 
+### index.mustache 
 
-You can declare any name, but the file extension must be `.mustache`  ([Mustache syntax](https://mustache.github.io/mustache.5.html))
+The default entry template is `index.mustache`  ([Mustache syntax](https://mustache.github.io/mustache.5.html))
+
+Make sure you have `index.mustache` in your source project folder.
 
 ### [language].json
 
