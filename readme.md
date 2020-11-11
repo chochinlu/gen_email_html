@@ -24,7 +24,7 @@ issue999
   - config.json
   - en.json
   - cn.json
-  - email.mustache
+  - index.mustache
 ```
 
 ### config.json 
