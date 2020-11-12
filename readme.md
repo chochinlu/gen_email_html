@@ -108,8 +108,7 @@ $npm run hello
 Development: 
 
 ```
-$ npm run build [your source project folder name]
-$ npm run watch [your source project folder name]
+$ npm run go [your source project folder name]
 ```
 
 The target url will look like `localhost:3000/en.html` or `localhost:3000/cn.html`
