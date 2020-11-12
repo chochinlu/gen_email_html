@@ -8,6 +8,7 @@
     "clean": "gulp clean",
     "watch": "gulp watch --issue",
     "build": "gulp default --issue",
+    "go": "./buildAndWatch.sh",
     "gen": "node genConfig.js"
   },
   "keywords": [],

@@ -1,0 +1,1 @@
+npm run build $1 && npm run watch $1
