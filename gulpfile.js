@@ -43,7 +43,7 @@ function allLang(done) {
     return () => {
       return src(sourceTemplate)
         .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: '.html' }))
-        .pipe(inlineCss({ removeHtmlSelectors: true }))
+        .pipe(inlineCss({removeStyleTags: true}))
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(rename(`${lang}.html`))
         .pipe(dest(target))
