@@ -9,6 +9,7 @@
     "watch": "gulp watch --issue",
     "build": "gulp default --issue",
     "build:copy": "./buildAndCopy.sh",
+    "build:copy:134": "./buildAndCopy134.sh",
     "go": "./buildAndWatch.sh",
     "gen": "node genConfig.js"
   },
