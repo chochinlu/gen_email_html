@@ -118,3 +118,9 @@ Build final result:
 ```
 $ npm run build [your source project folder name]
 ```
+
+Build the final result and copy/append to the `result.txt`: 
+
+```
+$ npm run build:copy [your source project folder name] 
+```
