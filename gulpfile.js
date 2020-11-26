@@ -39,11 +39,17 @@ function copyImg() {
 
 // minified html, and sql
 function allLang(done) {
-  const tasks = config.langs.map(lang => {
+  const tasks = config.langs.map((lang) => {
     return () => {
       return src(sourceTemplate)
         .pipe(mustache(`${sourceDir}/${lang}.json`, { extension: '.html' }))
-        .pipe(inlineCss({removeStyleTags: true}))
+        .pipe(
+          inlineCss({
+            removeStyleTags: true,
+            removeHtmlSelectors: true,
+            preserveMediaQueries: true,
+          })
+        )
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(rename(`${lang}.html`))
         .pipe(dest(target))
@@ -53,7 +59,7 @@ function allLang(done) {
     }
   })
 
-  return parallel(...tasks, parallelDone => {
+  return parallel(...tasks, (parallelDone) => {
     parallelDone()
     done()
   })()
@@ -63,9 +69,9 @@ function allLang(done) {
 function browserSync(done) {
   browsersync.init({
     server: {
-      baseDir: target
+      baseDir: target,
     },
-    port: 3000
+    port: 3000,
   })
   done()
 }
