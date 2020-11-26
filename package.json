@@ -11,7 +11,8 @@
     "build:copy": "./buildAndCopy.sh",
     "build:copy:134": "./buildAndCopy134.sh",
     "go": "./buildAndWatch.sh",
-    "gen": "node genConfig.js"
+    "gen": "node genConfig.js",
+    "send:email": "./sendTestEmail.sh"
   },
   "keywords": [],
   "author": "",
