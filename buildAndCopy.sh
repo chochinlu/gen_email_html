@@ -20,7 +20,7 @@ do
     if [ -f "dist/${project}/${lang}.html" ]; then
       echo copy "${project}/${lang}.html"
       {
-        printf "${project}/${lang}.html\n"
+        printf "%s/%s.html\n" "$project" "$lang"
         cat "dist/${project}/${lang}.html"
         printf "\n\n"
       } >> $TARGET
