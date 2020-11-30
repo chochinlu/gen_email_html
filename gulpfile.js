@@ -7,9 +7,11 @@ const rename = require('gulp-rename')
 const inject = require('gulp-inject-string')
 const fs = require('fs')
 const browsersync = require('browser-sync').create()
+const path = require('path')
 
 // read command arguments to get paths
-const issue = process.argv[4]
+const issue = path.parse(process.argv[4]).name
+
 const sourceDir = `./src/${issue}`
 const sourceTemplate = `${sourceDir}/index.mustache`
 const sourceImage = `${sourceDir}/img/**/*.{gif,jpg,png,svg}`

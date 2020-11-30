@@ -119,8 +119,8 @@ Build final result:
 $ npm run build [your source project folder name]
 ```
 
-Build the final result and copy/append to the `result.txt`: 
+Build all en/zh/js html files to one file: 
 
 ```
-$ npm run build:copy [your source project folder name] 
+$ npm run build:copy 
 ```

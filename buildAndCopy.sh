@@ -1,14 +1,31 @@
-TARGET="result.txt"
+echo "Please input your target file name (default is result):"
+read -r TARGET
 
-npm run build $1
+if [ "$TARGET" = "" ]; then
+  TARGET="result"
+fi
 
-echo "${1}/en.html\n" >> $TARGET
-cat dist/$1/en.html >> $TARGET
-echo "\n" >> $TARGET
+echo "The result will be outputted to $TARGET"
 
-echo "${1}/zh.html\n" >> $TARGET
-cat dist/$1/zh.html >> $TARGET
-echo "\n\n\n" >> $TARGET
+echo "Please input your project main name (ex: 134, 24):"
+read -r PROJECT
 
-echo "Copy ${1} EN/ZH html result to ${TARGET}"
+PROJECT_LIST=$(cd src && ls -d "$PROJECT"-*)
+
+for project in $PROJECT_LIST
+do
+  npm run build $project
+  for lang in en zh ja
+  do
+    if [ -f "dist/${project}/${lang}.html" ]; then
+      echo copy "${project}/${lang}.html"
+      {
+        printf "${project}/${lang}.html\n"
+        cat "dist/${project}/${lang}.html"
+        printf "\n\n"
+      } >> $TARGET
+    fi
+  done
+done
+echo done!!
 
