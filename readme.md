@@ -119,6 +119,12 @@ Build final result:
 $ npm run build [your source project folder name]
 ```
 
+Email build result htmls for testing actual result (you need build first): 
+
+```
+$npm run send:email
+``` 
+
 Build all en/zh/js html files to one file: 
 
 ```
