@@ -1,12 +1,24 @@
-echo Please input your target email:
-read -r EMAIL
+while [ -z "$PROJECT" ] || [ ! -d "./src/$PROJECT" ]
+do
+  echo "Please input the valid target project name (ex: 24-213), type 'exit' to exit:"
+  read -r PROJECT
+done
 
+echo Your sending project is "$PROJECT"
+
+
+while [ -z "$EMAIL" ]
+do
+  echo "Please input the receiver email:"
+  read -r EMAIL
+done
+
+echo build $PROJECT ...
+npm run build $PROJECT
+
+echo Will send to "$EMAIL" ...
 TARGET=dist/$(ls dist)
 
-if [ -z "$EMAIL" ]; then
-  echo "you should input the receiver email."
-  exit 0
-fi
 
 for LANG in en zh ja
 do
@@ -15,3 +27,4 @@ do
     echo "${TARGET}/${LANG}.html has been send to $EMAIL"
   fi
 done
+
